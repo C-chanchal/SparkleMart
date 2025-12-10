@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Responsive Cart — Sparkle Store</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#fff7f9;
+      --card:#fff;
+      --accent:#e94c6e;
+      --accent-2:#ff9aa2;
+      --muted:#6b6b6b;
+      --glass:rgba(255,255,255,0.7);
+      --shadow:0 6px 20px rgba(0,0,0,0.08);
+      --max-width:1200px;
+    }
+    body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:var(--bg);color:#222;line-height:1.4}
+    .container{max-width:var(--max-width);margin:24px auto;padding:0 16px}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{height:48px;width:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    h1{font-size:1.15rem}
+    .cart-btn{position:relative;background:transparent;border:0;cursor:pointer;padding:8px 12px;border-radius:10px;display:flex;align-items:center;gap:8px}
+    .cart-count{position:absolute;top:-6px;right:-6px;background:var(--accent);color:#fff;border-radius:999px;padding:4px 7px;font-size:0.75rem;font-weight:600;box-shadow:var(--shadow)}
+    .cart-icon{width:22px;height:22px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:var(--card);border-radius:12px;padding:14px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+    .media{height:160px;border-radius:10px;background:linear-gradient(180deg,#ffdfe6,#ffe9ef);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent)}
+    .price{font-weight:700}
+    .add{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;border:0;padding:8px 12px;border-radius:8px;cursor:pointer}
+    .cart-drawer{position:fixed;right:0;top:0;height:100vh;width:420px;max-width:92vw;background:linear-gradient(180deg,rgba(255,255,255,0.98),#fff);box-shadow:-12px 0 30px rgba(0,0,0,0.12);transform:translateX(110%);transition:transform .28s ease;z-index:40;padding:20px;display:flex;flex-direction:column}
+    .cart-drawer.open{transform:translateX(0)}
+    .cart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .cart-list{overflow:auto;flex:1;padding-right:6px}
+    .cart-item{display:flex;gap:12px;padding:12px;border-radius:10px;margin-bottom:10px;background:var(--glass);align-items:center}
+    .cart-item img{width:64px;height:64px;border-radius:8px;object-fit:cover}
+    .qty{display:flex;align-items:center;gap:8px}
+    .qty button{width:28px;height:28px;border-radius:6px;border:1px solid #eee;background:#fff;cursor:pointer}
+    .totals{padding-top:12px;border-top:1px dashed #eee;margin-top:12px}
+    .tot-row{display:flex;justify-content:space-between;padding:6px 0}
+    .checkout{margin-top:12px;background:var(--accent);color:#fff;border:0;padding:12px;border-radius:10px;cursor:pointer;width:100%;font-weight:700}
+    .empty{padding:20px;text-align:center;color:var(--muted)}
+    @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.cart-drawer{width:360px}}
+    @media(max-width:560px){.grid{grid-template-columns:1fr}.cart-drawer{width:100%;max-width:100vw}}
+    .muted{color:var(--muted);font-size:0.95rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">SM</div>
+        <div>
+          <h1>Sparkle Store</h1>
+          <div class="muted">Click Add to Cart</div>
+        </div>
+      </div>
+
+      <button class="cart-btn" id="cartToggle" aria-expanded="false" aria-controls="cartDrawer">
+        <svg class="cart-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+          <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke="#222" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="10" cy="20" r="1" fill="#222"/>
+          <circle cx="18" cy="20" r="1" fill="#222"/>
+        </svg>
+        <span class="muted">Cart</span>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </header>
+
+    <main>
+      <section class="grid" id="productsGrid"></section>
+    </main>
+  </div>
+
+  <!-- Cart Drawer -->
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="cart-header">
+      <div>
+        <strong>Your Cart</strong>
+        <div class="muted" id="cartItemsCount">0 items</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button id="clearCart">Clear</button>
+        <button id="closeCart">✕</button>
+      </div>
+    </div>
+
+    <div class="cart-list" id="cartList"></div>
+
+    <div class="totals">
+      <div class="tot-row"><div class="muted">Subtotal</div><div id="subtotal">₹0.00</div></div>
+      <div class="tot-row"><div class="muted">Shipping</div><div id="shipping">₹0.00</div></div>
+      <div class="tot-row" style="font-size:1.1rem;font-weight:700"><div>Total</div><div id="grandTotal">₹0.00</div></div>
+      <button class="checkout" id="checkoutBtn">Checkout</button>
+    </div>
+  </aside>
+
+  <script>
+     const PRODUCTS = [
+    {id:'p1',title:'Blush Stick',price:349,desc:'Creamy blush for a natural glow.'},
+      {id:'p2',title:'Matte Lipstick' ,price:499,desc:'Long-lasting matte finish.'},
+      {id:'p3',title:'Glow Highlighter',price:599,desc:'Catch the light beautifully.'},
+      {id:'p4',title:'Volume Mascara',price:399,desc:'Lift and volumize lashes.'},
+      {id:'p5',title:'Liquid Eyeliner',price:299,desc:'Sharp, precise lines.'},
+      {id:'p6',title:'Setting Spray',price:249,desc:'Keeps makeup in place.'}
+  ];
+    let cart = {};
+    const productsGrid = document.getElementById('productsGrid');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartToggle = document.getElementById('cartToggle');
+    const closeCartBtn = document.getElementById('closeCart');
+    const clearCartBtn = document.getElementById('clearCart');
+    const cartCountEl = document.getElementById('cartCount');
+    const cartListEl = document.getElementById('cartList');
+    const cartItemsCount = document.getElementById('cartItemsCount');
+    const subtotalEl = document.getElementById('subtotal');
+    const shippingEl = document.getElementById('shipping');
+    const grandTotalEl = document.getElementById('grandTotal');
+
+    const formatCurrency = n => '₹' + n.toFixed(2);
+    const saveCart = () => localStorage.setItem('demo_cart_v1', JSON.stringify(cart));
+    const loadCart = () => { try{const raw=localStorage.getItem('demo_cart_v1'); if(raw) cart=JSON.parse(raw);}catch{cart={}} };
+
+    function renderProducts(){
+      productsGrid.innerHTML = PRODUCTS.map(p => `
+        <article class="card">
+          <div class="media">${p.title}</div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div class="muted">${p.desc}</div>
+            <div class="price">${formatCurrency(p.price)}</div>
+          </div>
+          <button class="add" data-id="${p.id}">Add to cart</button>
+        </article>
+      `).join('');
+      document.querySelectorAll('.add').forEach(btn =>
+        btn.addEventListener('click', () => addToCart(btn.dataset.id))
+      );
+    }
+
+    function renderCart(){
+      const items = Object.values(cart);
+      const totalQty = items.reduce((s, i) => s + i.qty, 0);
+      cartCountEl.textContent = totalQty;
+      cartItemsCount.textContent = `${totalQty} item(s)`;
+
+      if(!items.length){
+        cartListEl.innerHTML = '<div class="empty">Your cart is empty. Add something nice ✨</div>';
+        subtotalEl.textContent = shippingEl.textContent = grandTotalEl.textContent = formatCurrency(0);
+        return;
+      }
+
+      cartListEl.innerHTML = items.map(it => `
+        <div class="cart-item" data-id="${it.id}">
+          <img src="https://placehold.co/120x120?text=${encodeURIComponent(it.title)}" alt="${it.title}" />
+          <div style="flex:1">
+            <div class="title">${it.title}</div>
+            <div class="muted">${formatCurrency(it.price)} each</div>
+            <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">
+              <div class="qty">
+                <button class="dec" data-id="${it.id}">−</button>
+                <div>${it.qty}</div>
+                <button class="inc" data-id="${it.id}">+</button>
+              </div>
+              <div style="text-align:right">
+                <div style="font-weight:700">${formatCurrency(it.price * it.qty)}</div>
+                <button class="remove muted" data-id="${it.id}" style="border:none;background:none;cursor:pointer">Remove</button>
+              </div>
+            </div>
+          </div>
+        </div>`).join('');
+
+      cartListEl.querySelectorAll('.inc').forEach(b => b.onclick = () => {cart[b.dataset.id].qty++;saveCart();renderCart();});
+      cartListEl.querySelectorAll('.dec').forEach(b => b.onclick = () => {const id=b.dataset.id;if(cart[id].qty>1)cart[id].qty--;else delete cart[id];saveCart();renderCart();});
+      cartListEl.querySelectorAll('.remove').forEach(b => b.onclick = () => {delete cart[b.dataset.id];saveCart();renderCart();});
+
+      const subtotal = items.reduce((s,i)=>s+i.price*i.qty,0);
+      const shipping = subtotal>0 ? 50 : 0;
+      const total = subtotal+shipping;
+      subtotalEl.textContent = formatCurrency(subtotal);
+      shippingEl.textContent = formatCurrency(shipping);
+      grandTotalEl.textContent = formatCurrency(total);
+    }
+
+    function addToCart(id){
+      const p = PRODUCTS.find(x => x.id === id);
+      if(!p) return;
+      if(cart[id]) cart[id].qty++;
+      else cart[id] = {...p, qty:1};
+      saveCart();
+      renderCart(); // ✅ updates count immediately, does NOT open drawer
+    }
+
+    const openCart = () => {cartDrawer.classList.add('open');cartDrawer.setAttribute('aria-hidden','false');};
+    const closeCart = () => {cartDrawer.classList.remove('open');cartDrawer.setAttribute('aria-hidden','true');};
+
+    cartToggle.onclick = openCart;
+    closeCartBtn.onclick = closeCart;
+    clearCartBtn.onclick = () => {cart={};saveCart();renderCart();};
+    document.getElementById('checkoutBtn').onclick = () => alert('Checkout not implemented 🛍️');
+
+    loadCart();
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>

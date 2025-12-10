@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparkle Mart- Premium Cosmetics & Beauty Products</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">Sparkle Mart</a>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#categories">Categories</a></li>      
+                  <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+          <div class="nav-icons">
+    <a href="#" class="nav-icon search-icon">🔍</a>
+    <a href="register.html" class="nav-icon user-icon">👤</a>
+    <a href="login.html" class="nav-icon login-icon">🔑 </a> <!-- NEW LOGIN BUTTON -->
+    <a href="cart.html" class="nav-icon cart-icon" id="cart-btn">
+        🛒
+        <span class="cart-count">0</span>
+    </a>
+</div>
+
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>Discover your natural beauty</h1>
+            <p>Premium cosmetics crafted with love and care for your unique glow</p>
+            <a href="#products" class="btn btn-primary">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="categories-grid">
+              <a href="skincare.html">
+                  <div class="category-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7b8d457b-4add-4488-bb84-8fbcaf42bd3d.png" alt="Luxury skincare products arranged elegantly with botanical ingredients and glass bottles" class="category-image">
+                    <div class="category-content">
+                        <h3>Skincare</h3>
+                        <p>Nourish your skin with our premium collection</p>
+                    </div>
+                </div>
+              </a>
+                <a href="makeup.html">
+                    <div class="category-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/29fb9c25-cf47-494a-a127-addfe226793c.png" alt="Colorful makeup palette with brushes and lipsticks on marble background" class="category-image">
+                    <div class="category-content">
+                        <h3>Makeup</h3>
+                        <p>Express yourself with vibrant colors</p>
+                    </div>
+                </div>
+                </a>
+           <a href="haircare.html">
+            <div class="category-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/85caaffa-43b5-4d83-8fdb-e763f996adeb.png" alt="Natural hair care products with flowers and organic ingredients" class="category-image">
+                    <div class="category-content">
+                        <h3>Hair Care</h3>
+                        <p>Transform your hair with natural solutions</p>
+                    </div>
+                </div>
+           </a>
+               <a href="perfume.html">
+                 <div class="category-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/835e59ef-b982-4ddb-8793-1c422a29a999.png" alt="Elegant fragrance bottles and perfumes with floral arrangements" class="category-image">
+                    <div class="category-content">
+                        <h3>Fragrance</h3>
+                        <p>Find your signature scent</p>
+                    </div>
+                </div>
+               </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products" id="products">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2c5cbfef-9fe6-4f4c-8151-3a9f2389dc99.png" alt="Hydrating facial serum with dropper in elegant glass bottle" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">Hydrating Face Serum</h3>
+                        <div class="product-rating">★★★★★</div>
+                        <div class="product-price">Rs.999</div>
+                        <button class="add-to-cart" data-product="Hydrating Face Serum" data-price="49.99">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b79ef0dc-ba36-4159-9d12-539f9e060c85.png" alt="Luxury eyeshadow palette with multiple shades and gold packaging" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">Luxury Eyeshadow Palette</h3>
+                        <div class="product-rating">★★★★☆</div>
+                        <div class="product-price">Rs.650</div>
+                        <button class="add-to-cart" data-product="Luxury Eyeshadow Palette" data-price="65.00">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f82b9409-a3ef-4b63-ac2b-e4358e19ff13.png" alt="Organic shampoo and conditioner set with natural ingredients" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">Organic Hair Care Set</h3>
+                        <div class="product-rating">★★★★★</div>
+                        <div class="product-price">Rs.899</div>
+                        <button class="add-to-cart" data-product="Organic Hair Care Set" data-price="89.99">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/95ba9604-b8b0-482a-a4d5-6173ddb547c8.png" alt="Elegant perfume bottle with floral notes and gold accents" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">Signature Perfume</h3>
+                        <div class="product-rating">★★★★☆</div>
+                        <div class="product-price">Rs.470</div>
+                        <button class="add-to-cart" data-product="Signature Perfume" data-price="120.00">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="                https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f0660306-2cd5-4aa3-b6a4-2e8a6efcd0a3.png" alt="Anti-aging night cream in luxurious jar with gold lid" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">Anti-Aging Night Cream</h3>
+                        <div class="product-rating">★★★★★</div>
+                        <div class="product-price">Rs.769</div>
+                        <button class="add-to-cart" data-product="Anti-Aging Night Cream" data-price="75.50">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d532bc55-eafc-4ed4-9135-091d9daf9425.png" alt="Matte lipstick collection in various shades with elegant packaging" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">Matte Lipstick Collection</h3>
+                        <div class="product-rating">★★★★☆</div>
+                        <div class="product-price">Rs.400</div>
+                        <button class="add-to-cart" data-product="Matte Lipstick Collection" data-price="45.00">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+            <!--about -->
+                <section class="about" id="about" style="padding: 80px 20px; 
+                                                background: linear-gradient(135deg, #fff0f0, #ffe6e6); 
+                                                text-align: center; 
+                                                position: relative; 
+                                                overflow: hidden;">
+            <div class="container">
+                <h2 class="section-title text-danger mb-4 animate-heading">About Sparkle Mart</h2>
+                <p class="animate-text" style="font-size: 1.2rem; line-height: 1.8; max-width: 800px; margin: 0 auto; color: #333;">
+                    At <strong>Sparkle Mart</strong>, we believe that beauty is an expression of your unique self. 
+                    Our mission is to bring premium, high-quality cosmetics and skincare products to empower every individual 
+                    to shine with confidence.
+                </p>
+                <p class="animate-text" style="font-size: 1.2rem; line-height: 1.8; max-width: 800px; margin: 20px auto 0; color: #333;">
+                    From nourishing skincare to vibrant makeup, our curated collection is crafted with love, care, 
+                    and the finest ingredients. We are committed to sustainability, cruelty-free practices, 
+                    and providing products that not only enhance your beauty but also care for your skin and the planet.
+                </p>
+                <a href="#products" class="btn btn-danger mt-4 animate-text">Shop Our Collection</a>
+            </div>
+        </section>
+
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <img src="c:\Users\INDIA\Downloads\meritt-thomas-aoQ4DYZLE_E-unsplash.jpg" alt="Smiling woman with glowing skin and natural makeup" class="testimonial-avatar">
+                    <p class="testimonial-text">"The hydrating serum completely transformed my skin! I've never felt more confident."</p>
+                    <p class="testimonial-author">- Sanskriti Jha</p>
+                </div>
+                <div class="testimonial-card">
+                    <img src="c:\Users\INDIA\Downloads\raamin-ka-uR51HXLO7G0-unsplash.jpg" alt="Professional makeup artist with colorful eye makeup" class="testimonial-avatar">
+                    <p class="testimonial-text">"As a professional makeup artist, I trust Sparkle Mart                                                       products for all my clients. Quality is exceptional!"</p>
+                    <p class="testimonial-author">-Preeti Sharma </p>
+                </div>
+                <div class="testimonial-card">
+                    <img src="c:\Users\INDIA\Downloads\matheus-ferrero-W7b3eDUb_2I-unsplash.jpg" alt="Elderly woman with radiant skin and elegant style" class="testimonial-avatar">
+                    <p class="testimonial-text">"The anti-aging cream has reduced my wrinkles significantly. I feel 20 years younger!"</p>
+                    <p class="testimonial-author">- Shweta Rathore</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container newsletter-content">
+            <h2>Stay Beautiful with Our Updates</h2>
+            <p>Subscribe to our newsletter for exclusive offers, beauty tips, and new product launches.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email" class="newsletter-input" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+<!-- Footer -->
+<footer id="contact">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h3>Sparkle Mart</h3>
+                <p>Premium cosmetics and beauty products crafted with passion and care.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">📷</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📌</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Skincare</a></li>
+                    <li><a href="#">Makeup</a></li>
+                    <li><a href="#">Hair Care</a></li>
+                    <li><a href="#">Fragrance</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <p>📧 infosparkle.mart.com</p>
+                <p>📞8853 7544 0098</p>
+                <p>📍 123 Beauty Street, Indore Cosmetic Market</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2025 Sparkle Mart. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- Cart Modal -->
+    <div class="overlay" id="overlay"></div>
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button id="close-cart">✕</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be added here dynamically -->
+        </div>
+        <div class="cart-total">
+            <div class="cart-total-price">Total:00</div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+  <script src="app.js"> </script>
+   </body>
+</html>

@@ -284,5 +284,33 @@
         </div>
     </div>
   <script src="app.js"> </script>
+
+
+
+ <script>
+const hero = document.querySelector(".hero");
+
+const unsplashURL =
+  "https://source.unsplash.com/1600x900/?cosmetics,beauty,makeup&" + Math.random();
+
+const img = new Image(); 
+
+img.onload = () => {
+    hero.style.backgroundImage =
+        `linear-gradient(135deg, rgba(237,104,133,0.7), rgba(255,209,102,0.7)),
+        url('${unsplashURL}')`;
+};
+
+img.onerror = () => {
+    console.log("Unsplash failed.");
+};
+
+img.src = unsplashURL;
+</script>
+
+
+
+
+
    </body>
 </html>

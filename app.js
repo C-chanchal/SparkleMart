@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const emailInput = newsletterForm.querySelector('input[type="email"]');
       if (emailInput && emailInput.value.trim() !== '') {
         const email = emailInput.value.trim();
-        alert(`Thank you for subscribing with ${email}!`);
+        alert(`Thank you for subscribing  ${email}!`);
         emailInput.value = '';
       } else {
         alert('Please enter a valid email address.');
@@ -132,10 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const data = {
         fullName: document.getElementById("fullName").value,
-        email: document.getElementById("email").value,
+        email: document.getElementById("regEmail").value,
         phone: document.getElementById("phone").value,
         address: document.getElementById("address").value,
-        password: "12345" // default password
+        password: document.getElementById("regPassword").value
       };
 
       try {
